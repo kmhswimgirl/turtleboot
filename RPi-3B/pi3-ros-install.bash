@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# make swapfile
+    # sudo fallocate -l 2G /swapfile
+    # sudo chmod 600 /swapfile
+    # sudo mkswap /swapfile
+    # sudo swapon /swapfile
+    # echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+    # free -h --> to check for swap memory
+
+# install ROS Jazzy
+    # apt install software-properties-common
+    # sudo add-apt-repository universe
+
+    # sudo apt update && sudo apt install curl -y
+    # export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
+    # curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" # If using Ubuntu derivates use $UBUNTU_CODENAME
+    # sudo apt install /tmp/ros2-apt-source.deb
+
+    # sudo apt update && sudo apt install ros-dev-tools
+    # sudo apt update && sudo apt upgrade
+    # sudo apt install ros-jazzy-ros-base
+
+    # source /opt/ros/jazzy/setup.bash
+
+# Post-ROS install
+    # apt install python3-argcomplete python3-colcon-common-extensions libboost-system-dev build-essential
+    # apt install ros-jazzy-hls-lfcd-lds-driver
+    # apt install ros-jazzy-turtlebot3-msgs
+    # apt install ros-jazzy-dynamixel-sdk
+    # apt install libudev-dev
+
+# cloning packages
+    # mkdir -p ~/turtlebot3_ws/src && cd ~/turtlebot3_ws/src
+    # git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3.git
+    # git clone -b jazzy https://github.com/ROBOTIS-GIT/ld08_driver.git
+    # cd ~/turtlebot3_ws/src/turtlebot3
+    # rm -r turtlebot3_cartographer turtlebot3_navigation2
+    # cd ~/turtlebot3_ws/
+
+# building packages
+    #
+
