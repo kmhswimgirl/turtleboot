@@ -2,7 +2,7 @@
 
 set -e # exit on errors
 
-CONFIG_FILE="/home/ubuntu/config.txt" # store variables so the state does not get reset after the reboot
+CONFIG_FILE="~/config.txt" # store variables so the state does not get reset after the reboot
 
 # Check if config file exists
 if [ ! -f "$CONFIG_FILE" ]; then

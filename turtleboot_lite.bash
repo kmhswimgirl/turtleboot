@@ -46,6 +46,7 @@ cat << "EOF"
   | || | | | '__| __| |/ _ \  _ \ / _ \ / _ \| __|
   | || |_| | |  | |_| |  __/ |_) | (_) | (_) | |_ 
   |_| \__,_|_|   \__|_|\___|____/ \___/ \___/ \__|
+            L      I       T       E
                    _____     ____
                  /      \  |  o | 
                 |        |/ ___\| 
@@ -53,7 +54,7 @@ cat << "EOF"
                 |_|_| |_|_|
 EOF
 
-echo "Welcome to TurtleBoot!"
+echo "Welcome to TurtleBoot Lite!"
 echo "developed by @kmhswimgirl"
 
 # confirm args
@@ -69,7 +70,6 @@ dpkg-reconfigure openssh-server
 
 # restart ssh server
 systemctl restart ssh
-
 echo "SSH keys regenerated!"
 
 # cloud-init parameter change
@@ -92,5 +92,4 @@ if [ -d ~/turtlebot3_ws ]; then
 fi
 
 echo "Reconfiguration Finished!"
-reboot
 exit 0
