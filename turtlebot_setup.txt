@@ -27,6 +27,7 @@
     # apt install ros-jazzy-hls-lfcd-lds-driver
     # apt install ros-jazzy-turtlebot3-msgs
     # apt install ros-jazzy-dynamixel-sdk
+    # apt install ros-jazzy-xacro
     # apt install libudev-dev
 
 # cloning packages
@@ -38,5 +39,6 @@
     # cd ~/turtlebot3_ws/
 
 # building packages
-    # 
+    # cd ~/turtlebot3_ws/
+    # colcon build --symlink-install
 
