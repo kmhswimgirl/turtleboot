@@ -2,11 +2,12 @@
 
 set -e # exit on errors
 
-CONFIG_FILE="/home/ubuntu/config.txt"
+CONFIG_FILE="~/config.txt" # store variables so the state does not get reset after the reboot
 
 # Check if config file exists
 if [ ! -f "$CONFIG_FILE" ]; then
     echo "SETUP_STATE=init" > "$CONFIG_FILE"
+    echo ""
 fi
 
 source "$CONFIG_FILE"
@@ -27,7 +28,7 @@ if ["$SETUP_STATE" = "init"]
     sudo reboot
 fi
 
-if ["$SETUP_STATE" = "swapfile" && $SWAP_FILE=false]
+if ["$SETUP_STATE" = "swapfile"] # make swapfile since Pi has 2GB RAM
 
     if [$SWAP_FILE=false]; then
         echo "SETUP_STATE=ros-install" > "$CONFIG_FILE"
@@ -46,15 +47,11 @@ if ["$SETUP_STATE" = "swapfile" && $SWAP_FILE=false]
     # add fstab for consistency after reboots
     echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
-    # verify swap is active, probably can remove these...
-    free -h
-    swapon --show
-
     echo "SETUP_STATE=ros-install" > "$CONFIG_FILE"
 fi
 
-if ["$SETUP_STATE" = "ros-install"]
-    apt install software-properties-common
+if ["$SETUP_STATE" = "ros-install"] # install ROS Jazzy
+    apt install -y software-properties-common
     sudo add-apt-repository universe
 
     sudo apt update && sudo apt install curl -y
@@ -62,10 +59,9 @@ if ["$SETUP_STATE" = "ros-install"]
     curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" # If using Ubuntu derivates use $UBUNTU_CODENAME
     sudo apt install /tmp/ros2-apt-source.deb
 
-    sudo apt update && sudo apt install ros-dev-tools
+    sudo apt update && sudo apt install -y ros-dev-tools
     sudo apt update && sudo apt upgrade
-    sudo apt install ros-jazzy-ros-base
+    sudo apt install -y ros-jazzy-ros-base
 
     source /opt/ros/jazzy/setup.bash
-
 fi
