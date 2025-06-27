@@ -1,16 +1,19 @@
 #!/bin/bash
 
+# Turtleboot Lite v1.0.2
 # Reconfiguring the network settings / regenerating SSH Key only after a microSD clone
-# Status --> UNTESTED
+# Status --> TESTED (On Ubuntu 24.04 VM)
 
 # exit on errors
 set -e
 
-# variables from cl args
-TURTLEBOT_NAME="turtlebot3-clone"
+# variables from cl args with defaults
+TURTLEBOT_NAME="turtle_boot"
 ROS_ID="30"
 REBUILD="false"
+REBOOT="false"
 
+# handling cli args
 while [[ $# -gt 0 ]]; do
     case $1 in
         --name|-n)
@@ -25,12 +28,12 @@ while [[ $# -gt 0 ]]; do
             REBUILD="true"
             shift
             ;;
-        --no-rebuild)
-            REBUILD="false"
+        --reboot)
+            REBOOT="true"
             shift
             ;;
         --help|-h)
-            echo "Usage: $0 [--name|-n NAME] [--ros-id|-id ID] [--rebuild|--no-rebuild]"
+            echo "Usage: $0 [--name|-n NAME] [--ros-id|-id ID] [--rebuild| None] [--reboot| None]"
             exit 0
             ;;
         *)
@@ -40,6 +43,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# fun ascii art :)
 cat << "EOF"
  _____           _   _      ____              _   
 |_   _|   _ _ __| |_| | ___| __ )  ___   ___ | |_ 
@@ -80,16 +84,26 @@ hostnamectl set-hostname $TURTLEBOT_NAME
 sed -i "2s/.*/127.0.0.1 $TURTLEBOT_NAME/" /etc/hosts
 echo "hostname set to $TURTLEBOT_NAME !"
 
-# cd into turtlebot3_ws
-cd ~/turtlebot3_ws/
+# rebuild tb3 packages set with flag --rebuild
+if [ "$REBUILD" = true ]; then
+    # cd into turtlebot3_ws
+    cd ~/turtlebot3_ws/
 
-# rebuild tb3 packages?
-if [ -d ~/turtlebot3_ws ]; then
-    cd ~/turtlebot3_ws
-    if [ "$REBUILD" = true ]; then
+    # confirm the correct directory
+    if [ -d ~/turtlebot3_ws ]; then
+        # rebuild turtlebot3_ws
         colcon build --symlink-install 
     fi
 fi
 
+# confirm reconfig status
 echo "Reconfiguration Finished!"
+
+# made rebooting after setup optional, REBOOT is set with the --reboot flag
+if ["$REBOOT" = true ]; then
+    reboot
+fi
+
+# warning if --reboot was not chosen in cli args
+echo "Please reboot in order to see Turtleboot Lite's changes take effect!"
 exit 0
