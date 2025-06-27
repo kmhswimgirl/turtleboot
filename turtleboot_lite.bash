@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Turtleboot Lite v1.0.2
+# Turtleboot Lite v1.0.4
 # Reconfiguring the network settings / regenerating SSH Key only after a microSD clone
 # Status --> TESTED (On Ubuntu 24.04 VM)
 
