@@ -56,13 +56,13 @@ echo "developed by @kmhswimgirl"
 
 if [ "$SWAPFILE" = "true" ]; then
   # make swapfile if RPi has <= 2GB RAM --> ask for bool
-  fallocate -l 2G /swapfile
-  chmod 600 /swapfile
-  mkswap /swapfile
-  swapon /swapfile
+  sudo fallocate -l 2G /swapfile
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
   echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
   free -h # --> to check for swap memory
-  echo "Swapfile sucessfully created!"
+  echo "Swapfile successfully created!"
 fi
 
 # Other required dependencies
