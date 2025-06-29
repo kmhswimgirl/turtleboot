@@ -101,13 +101,13 @@ sudo apt install -y libudev-dev
 mkdir -p ~/turtlebot3_ws/src
 cd ~/turtlebot3_ws/src
 
-# Remove any existing root-owned or broken turtlebot3 directory to avoid git clone errors
+# check for duplicate dir or accidental root owned dir
 if [ -d "turtlebot3" ]; then
   echo "Removing existing turtlebot3 directory (may be root-owned or incomplete)..."
   sudo rm -rf turtlebot3
 fi
 
-# Clone Packages from GitHub
+# Clone Packages from GitHub, make sure branches are there as well
 if ! git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3.git; then
   echo "Failed to clone turtlebot3 repository. Check if the branch 'jazzy' exists."
   exit 1
@@ -129,20 +129,18 @@ grep -qxF 'source /opt/ros/jazzy/setup.bash' ~/.bashrc || echo 'source /opt/ros/
 cd ~/turtlebot3_ws/
 colcon build --symlink-install --parallel-workers 1
 
-# Prevent duplicate workspace sourcing
+# prevent ~/.bashrc clutter
 grep -qxF 'source ~/turtlebot3_ws/install/setup.bash' ~/.bashrc || echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
-source ~/turtlebot3_ws/install/setup.bash
-
-# open cr usb port settings 
-echo "Sourcing ROS setup files for ros2 pkg prefix..."
 source /opt/ros/jazzy/setup.bash
 source ~/turtlebot3_ws/install/setup.bash
+
 PKG_PREFIX=$(ros2 pkg prefix turtlebot3_bringup)
 if [ -z "$PKG_PREFIX" ]; then
   echo "Could not find turtlebot3_bringup package. Exiting."
   exit 1
 fi
 sudo cp "$PKG_PREFIX/share/turtlebot3_bringup/script/99-turtlebot3-cdc.rules" /etc/udev/rules.d/
+
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
@@ -150,9 +148,9 @@ sudo udevadm trigger
 grep -qxF "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" ~/.bashrc || echo "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" >> ~/.bashrc
 grep -qxF "export LDS_MODEL=LDS-0$LIDAR # lidar config" ~/.bashrc || echo "export LDS_MODEL=LDS-0$LIDAR # lidar config" >> ~/.bashrc
 
-# Optionally, kill the sudo keep-alive background process
+# Kill sudo process
 kill %1 2>/dev/null || true
 
+# confirm sucess
 echo "Set up complete!"
-
 exit 0
