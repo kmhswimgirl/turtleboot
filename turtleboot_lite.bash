@@ -8,7 +8,7 @@
 set -e
 
 # variables from cl args with defaults
-TURTLEBOT_NAME="turtle_boot"
+TURTLEBOT_NAME="turtleboot"
 ROS_ID="30"
 REBUILD="false"
 REBOOT="false"
