@@ -66,22 +66,26 @@ echo "TurtleBot Name: $TURTLEBOT_NAME"
 echo "Rebuild flag: $REBUILD"
 echo "ROS Domain ID: $ROS_ID"
 
+# ask for password once
+sudo -v
+while true; do sudo -n true; sleep 60; done 2>/dev/null &
+
 # delete old ssh key
-rm -v /etc/ssh/ssh_host_*
+sudo rm -v /etc/ssh/ssh_host_*
 
 # regen SSH Key
-dpkg-reconfigure openssh-server
+sudo dpkg-reconfigure openssh-server
 
 # restart ssh server
-systemctl restart ssh
+sudo systemctl restart ssh
 echo "SSH keys regenerated!"
 
 # cloud-init parameter change
-sed -i "15s/.*/preserve_hostname: true/" /etc/cloud/cloud.cfg
+sudo sed -i "15s/.*/preserve_hostname: true/" /etc/cloud/cloud.cfg
 
 # writing in the new hostname
-hostnamectl set-hostname $TURTLEBOT_NAME
-sed -i "2s/.*/127.0.0.1 $TURTLEBOT_NAME/" /etc/hosts
+sudo hostnamectl set-hostname $TURTLEBOT_NAME
+sudo sed -i "2s/.*/127.0.0.1 $TURTLEBOT_NAME/" /etc/hosts
 echo "hostname set to $TURTLEBOT_NAME !"
 
 # rebuild tb3 packages set with flag --rebuild
