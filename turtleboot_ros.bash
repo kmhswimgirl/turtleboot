@@ -38,7 +38,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # fun ascii art :)
-cat << "EOF"\
+cat << "EOF"
  _____           _   _      ____              _   
 |_   _|   _ _ __| |_| | ___| __ )  ___   ___ | |_ 
   | || | | | '__| __| |/ _ \  _ \ / _ \ / _ \| __|
@@ -118,9 +118,18 @@ echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
 source ~/.bashrc
 
 # open cr usb port settings 
-sudo cp `ros2 pkg prefix turtlebot3_bringup`/share/turtlebot3_bringup/script/99-turtlebot3-cdc.rules /etc/udev/rules.d/
-sudo udevadm control --reload-rules
-sudo udevadm trigger
+# Ensure ROS environment is sourced for ros2 command
+echo "Sourcing ROS setup files for ros2 pkg prefix..."
+source /opt/ros/jazzy/setup.bash
+source ~/turtlebot3_ws/install/setup.bash
+PKG_PREFIX=$(ros2 pkg prefix turtlebot3_bringup)
+if [ -z "$PKG_PREFIX" ]; then
+  echo "Could not find turtlebot3_bringup package. Exiting."
+  exit 1
+fi
+cp "$PKG_PREFIX/share/turtlebot3_bringup/script/99-turtlebot3-cdc.rules" /etc/udev/rules.d/
+udevadm control --reload-rules
+udevadm trigger
 
 # export variables for configuring the turtlebot
 echo "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" >> ~/.bashrc

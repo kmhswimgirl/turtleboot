@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Reconfiguring the network settings / regenerating SSH Key only after a microSD clone
-# Status --> UNTESTED
+# Status --> TESTED: Ubuntu Server 24.04.2 VM
 
 # exit on errors
 set -e
