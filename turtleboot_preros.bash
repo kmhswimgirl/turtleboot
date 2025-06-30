@@ -19,13 +19,16 @@ echo "developed by @kmhswimgirl"
 sudo -v
 while true; do sudo -n true; sleep 60; done 2>/dev/null &
 
- # change automatic update settings
-  sudo sed -i "1s/.*/APT::Periodic::Update-Package-Lists "0";/" /etc/apt/apt.conf.d/20auto-upgrades
-  sudo sed -i "2s/.*/APT::Periodic::Unattended-Upgrade "0";/" /etc/apt/apt.conf.d/20auto-upgrades
+# change automatic update settings
+sudo sed -i "1s/.*/APT::Periodic::Update-Package-Lists "0";/" /etc/apt/apt.conf.d/20auto-upgrades
+sudo sed -i "2s/.*/APT::Periodic::Unattended-Upgrade "0";/" /etc/apt/apt.conf.d/20auto-upgrades
 
-  # prevent boot-up delay
-  sudo systemctl mask systemd-networkd-wait-online.service
-  sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-  
-  # reboot
-  reboot
+# prevent boot-up delay
+sudo systemctl mask systemd-networkd-wait-online.service
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+# reboot
+reboot
+
+# sucessfully completed!
+exit 0

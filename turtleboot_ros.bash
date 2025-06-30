@@ -10,6 +10,7 @@ set -e
 SWAPFILE="true"
 ROS_ID="30"
 LIDAR="2"
+OPENCR="true"
 
 # handling cli args
 while [[ $# -gt 0 ]]; do
@@ -26,8 +27,12 @@ while [[ $# -gt 0 ]]; do
             SWAPFILE="false"
             shift
             ;;
+        --ros-only|-ro)
+            OPENCR="false"
+            shift
+            ;;
         --help|-h)
-            echo "Usage: $0 [--lidar|-ld LIDAR] [--ros-id|-id ID] [--no-swapfile|-nsf]"
+            echo "Usage: $0 [--lidar|-ld LIDAR] [--ros-id|-id ID] [--no-swapfile|-nsf None] [--ros-only|-ro None]"
             exit 0
             ;;
         *)
