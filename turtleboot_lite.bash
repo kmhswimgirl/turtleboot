@@ -38,7 +38,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --help|-h)
-            echo "Usage: $0 [--name|-n NAME] [--ros-id|-id ID] [--rebuild| None] [--reboot| None] [--wifi| None]"
+            echo "Usage: $0 [--name|-n NAME] [--ros-id|-id ID] [--rebuild| None] [--reboot| None]"
             exit 0
             ;;
         *)
@@ -68,7 +68,7 @@ echo "developed by @kmhswimgirl"
 
 # confirm args
 echo "TurtleBot Name: $TURTLEBOT_NAME"
-echo "Rebuild flag: $REBUILD, Wifi flag: $WIFI, Reboot flag: $REBOOT"
+echo "Rebuild flag: $REBUILD, Reboot flag: $REBOOT"
 echo "ROS Domain ID: $ROS_ID"
 
 # ask for password once
