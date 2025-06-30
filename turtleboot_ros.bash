@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ROS Jazzy Jalisco Install Script for Turtlebot 3 + OpenCR Configuration
-# status --> UNTESTED
+# status --> TESTED ON TURTLEBOT3 (RPi 3B+ and RPi 4B)
 
 # exit on error
 set -e

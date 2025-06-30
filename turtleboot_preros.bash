@@ -1,3 +1,9 @@
+#!/bin/bash
+
+# Turtleboot Pre-ROS v1.3
+# Prepares for installing ROS
+# status --> TESTED ON TURTLEBOT3 (RPi 3B+ and RPi 4B)
+
 set -e # exit on errors
 cat << "EOF"
  _____           _   _      ____              _   

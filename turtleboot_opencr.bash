@@ -1,3 +1,9 @@
+#!/bin/bash
+
+# Turtleboot OPEN CR v1.0
+# Configures OPEN CR board and installs drivers
+# status --> TESTED ON TURTLEBOT3 (RPi 3B+ and RPi 4B)
+
 set -e # exit on errors
 cat << "EOF"
  _____           _   _      ____              _   
