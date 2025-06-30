@@ -58,10 +58,14 @@ cat << "EOF"
 EOF
 echo "Welcome to TurtleBoot ROS+OPENCR!"
 echo "developed by @kmhswimgirl"
+# confirm args before entering password
+echo "ROS_DOMAIN_ID: $ROS_ID, Swapfile: $SWAPFILE, LiDAR Type: $LIDAR, OPEN CR Setup: $OPENCR"
 
+# start sudo session
 sudo -v
 while true; do sudo -n true; sleep 60; done 2>/dev/null &
 
+# swapfile logic
 if [ "$SWAPFILE" = "true" ]; then
   # make swapfile if RPi has <= 2GB RAM --> ask for bool
   sudo fallocate -l 2G /swapfile
@@ -153,7 +157,6 @@ grep -qxF "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" ~/.bashrc || echo "export R
 grep -qxF "export LDS_MODEL=LDS-0$LIDAR # lidar config" ~/.bashrc || echo "export LDS_MODEL=LDS-0$LIDAR # lidar config" >> ~/.bashrc
 
 # OPEN CR Section
-
 if [ "$OPENCR" = true ]; then
     sudo dpkg --add-architecture armhf  
     sudo apt-get update  
