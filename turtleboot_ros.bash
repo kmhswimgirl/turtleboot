@@ -160,7 +160,7 @@ grep -qxF "export LDS_MODEL=LDS-0$LIDAR # lidar config" ~/.bashrc || echo "expor
 if [ "$OPENCR" = true ]; then
     sudo dpkg --add-architecture armhf  
     sudo apt-get update  
-    sudo apt-get install libc6:armhf
+    sudo apt-get install -y libc6:armhf
 
     export OPENCR_PORT=/dev/ttyACM0  
     export OPENCR_MODEL=burger

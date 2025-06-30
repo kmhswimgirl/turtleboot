@@ -20,7 +20,7 @@ while true; do sudo -n true; sleep 60; done 2>/dev/null &
 
 sudo dpkg --add-architecture armhf  
 sudo apt-get update  
-sudo apt-get install libc6:armhf
+sudo apt-get -y install libc6:armhf
 
 export OPENCR_PORT=/dev/ttyACM0  
 export OPENCR_MODEL=burger
