@@ -28,6 +28,10 @@ while [[ $# -gt 0 ]]; do
             REBUILD="true"
             shift
             ;;
+        --wifi)
+            WIFI="true"
+            shift
+            ;;
         --reboot)
             REBOOT="true"
             shift
@@ -63,7 +67,7 @@ echo "developed by @kmhswimgirl"
 
 # confirm args
 echo "TurtleBot Name: $TURTLEBOT_NAME"
-echo "Rebuild flag: $REBUILD"
+echo "Rebuild flag: $REBUILD, Reboot flag: $REBOOT"
 echo "ROS Domain ID: $ROS_ID"
 
 # ask for password once
@@ -104,10 +108,15 @@ fi
 echo "Reconfiguration Finished!"
 
 # made rebooting after setup optional, REBOOT is set with the --reboot flag
-if ["$REBOOT" = true ]; then
+if [ "$REBOOT" = true ]; then
     reboot
 fi
 
 # warning if --reboot was not chosen in cli args
 echo "Please reboot in order to see Turtleboot Lite's changes take effect!"
+
+# kill sudo process
+kill %1 2>/dev/null || true
+
+# sucessful, so exit is 0
 exit 0
