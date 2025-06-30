@@ -6,10 +6,6 @@
 # exit on error
 set -e
 
-# Ask for sudo password once and keep sudo session alive
-sudo -v
-while true; do sudo -n true; sleep 60; done 2>/dev/null &
-
 # Args: swapfile: bool, ROS_DOMAIN_ID: int, lidar type: int
 SWAPFILE="true"
 ROS_ID="30"
@@ -57,6 +53,9 @@ cat << "EOF"
 EOF
 echo "Welcome to TurtleBoot ROS+OPENCR!"
 echo "developed by @kmhswimgirl"
+
+sudo -v
+while true; do sudo -n true; sleep 60; done 2>/dev/null &
 
 if [ "$SWAPFILE" = "true" ]; then
   # make swapfile if RPi has <= 2GB RAM --> ask for bool
@@ -147,6 +146,24 @@ sudo udevadm trigger
 # export variables for configuring the turtlebot, prevent duplicates
 grep -qxF "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" ~/.bashrc || echo "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" >> ~/.bashrc
 grep -qxF "export LDS_MODEL=LDS-0$LIDAR # lidar config" ~/.bashrc || echo "export LDS_MODEL=LDS-0$LIDAR # lidar config" >> ~/.bashrc
+
+# OPEN CR Section
+
+if [ "$OPENCR" = true ]; then
+    sudo dpkg --add-architecture armhf  
+    sudo apt-get update  
+    sudo apt-get install libc6:armhf
+
+    export OPENCR_PORT=/dev/ttyACM0  
+    export OPENCR_MODEL=burger
+    rm -rf ./opencr_update.tar.bz2 
+
+    wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/raw/master/turtlebot3/ROS2/latest/opencr_update.tar.bz2   
+    tar -xvf opencr_update.tar.bz2 
+
+    cd ./opencr_update  
+    ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
+fi
 
 # Kill sudo process
 kill %1 2>/dev/null || true
