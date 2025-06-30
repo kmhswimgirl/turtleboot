@@ -12,6 +12,7 @@ TURTLEBOT_NAME="turtle_boot"
 ROS_ID="30"
 REBUILD="false"
 REBOOT="false"
+WIFI="false"
 
 # handling cli args
 while [[ $# -gt 0 ]]; do
@@ -28,12 +29,16 @@ while [[ $# -gt 0 ]]; do
             REBUILD="true"
             shift
             ;;
+        --wifi)
+            WIFI="true"
+            shift
+            ;;
         --reboot)
             REBOOT="true"
             shift
             ;;
         --help|-h)
-            echo "Usage: $0 [--name|-n NAME] [--ros-id|-id ID] [--rebuild| None] [--reboot| None]"
+            echo "Usage: $0 [--name|-n NAME] [--ros-id|-id ID] [--rebuild| None] [--reboot| None] [--wifi| None]"
             exit 0
             ;;
         *)
@@ -63,8 +68,15 @@ echo "developed by @kmhswimgirl"
 
 # confirm args
 echo "TurtleBot Name: $TURTLEBOT_NAME"
-echo "Rebuild flag: $REBUILD"
+echo "Rebuild flag: $REBUILD, Wifi flag: $WIFI, Reboot flag: $REBOOT"
 echo "ROS Domain ID: $ROS_ID"
+
+# ask for SSID and Password
+if [ "$WIFI" = true ]; then
+    read -p "Enter WiFi SSID: " SSID
+    read -p "Enter WiFi Password: " PASSWORD
+    echo
+fi
 
 # ask for password once
 sudo -v
@@ -88,6 +100,23 @@ sudo hostnamectl set-hostname $TURTLEBOT_NAME
 sudo sed -i "2s/.*/127.0.0.1 $TURTLEBOT_NAME/" /etc/hosts
 echo "hostname set to $TURTLEBOT_NAME !"
 
+# connect to wifi
+if [ "$WIFI" = true ]; then
+sudo tee /etc/netplan/50-cloud-init.yaml > /dev/null <<EOF
+network:
+  version: 2
+  renderer: networkd
+  wifis:
+    wlan0:
+      dhcp4: true
+      access-points:
+        "$SSID":
+          password: "$PASSWORD"
+EOF
+
+sudo netplan apply
+fi
+
 # rebuild tb3 packages set with flag --rebuild
 if [ "$REBUILD" = true ]; then
     # cd into turtlebot3_ws
@@ -104,10 +133,13 @@ fi
 echo "Reconfiguration Finished!"
 
 # made rebooting after setup optional, REBOOT is set with the --reboot flag
-if ["$REBOOT" = true ]; then
+if [ "$REBOOT" = true ]; then
     reboot
 fi
 
 # warning if --reboot was not chosen in cli args
 echo "Please reboot in order to see Turtleboot Lite's changes take effect!"
+
+# kill sudo process
+kill %1 2>/dev/null || true
 exit 0
