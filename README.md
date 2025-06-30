@@ -12,7 +12,7 @@ Bash scripts to auto install ROS (Jazzy) and configure the SBC on a Turtlebot3.
                 |_________/     
                 |_|_| |_|_|
 ```
-## Turtleboot Lite:
+## TurtleBoot Lite:
 Script name: `turtleboot_lite.bash`
 
 ### Args:
@@ -41,3 +41,5 @@ First make the script executable with:
 Run the script:
 </br>
 `bash turtleboot_lite.bash --name shelly --ros-id 22 --reboot`
+
+## TurtleBoot ROS
