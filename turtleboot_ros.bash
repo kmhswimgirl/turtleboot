@@ -11,6 +11,7 @@ SWAPFILE="true"
 ROS_ID="30"
 LIDAR="2"
 OPENCR="true"
+MODEL="burger"
 
 # handling cli args
 while [[ $# -gt 0 ]]; do
@@ -31,8 +32,12 @@ while [[ $# -gt 0 ]]; do
             OPENCR="false"
             shift
             ;;
+        --model|-m)
+            MODEL="$2"
+            shift 2
+            ;;
         --help|-h)
-            echo "Usage: $0 [--lidar|-ld LIDAR] [--ros-id|-id ID] [--no-swapfile|-nsf None] [--ros-only|-ro None]"
+            echo "Usage: $0 [--lidar|-ld LIDAR] [--ros-id|-id ID] [--model|-m MODEL] [--no-swapfile|-nsf None] [--ros-only|-ro None]"
             exit 0
             ;;
         *)
@@ -155,6 +160,7 @@ sudo udevadm trigger
 # export variables for configuring the turtlebot, prevent duplicates
 grep -qxF "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" ~/.bashrc || echo "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" >> ~/.bashrc
 grep -qxF "export LDS_MODEL=LDS-0$LIDAR # lidar config" ~/.bashrc || echo "export LDS_MODEL=LDS-0$LIDAR # lidar config" >> ~/.bashrc
+grep -qxF "export TURTLEBOT3_MODEL=$MODEL # model" ~/.bashrc || echo "export TURTLEBOT3_MODEL=$MODEL # model" >> ~/.bashrc
 
 # OPEN CR Section
 if [ "$OPENCR" = true ]; then
