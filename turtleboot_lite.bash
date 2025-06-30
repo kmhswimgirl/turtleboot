@@ -12,7 +12,6 @@ TURTLEBOT_NAME="turtle_boot"
 ROS_ID="30"
 REBUILD="false"
 REBOOT="false"
-WIFI="false"
 
 # handling cli args
 while [[ $# -gt 0 ]]; do
