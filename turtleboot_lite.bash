@@ -71,13 +71,6 @@ echo "TurtleBot Name: $TURTLEBOT_NAME"
 echo "Rebuild flag: $REBUILD, Wifi flag: $WIFI, Reboot flag: $REBOOT"
 echo "ROS Domain ID: $ROS_ID"
 
-# ask for SSID and Password
-if [ "$WIFI" = true ]; then
-    read -p "Enter WiFi SSID: " SSID
-    read -p "Enter WiFi Password: " PASSWORD
-    echo
-fi
-
 # ask for password once
 sudo -v
 while true; do sudo -n true; sleep 60; done 2>/dev/null &
@@ -99,23 +92,6 @@ sudo sed -i "15s/.*/preserve_hostname: true/" /etc/cloud/cloud.cfg
 sudo hostnamectl set-hostname $TURTLEBOT_NAME
 sudo sed -i "2s/.*/127.0.0.1 $TURTLEBOT_NAME/" /etc/hosts
 echo "hostname set to $TURTLEBOT_NAME !"
-
-# connect to wifi
-if [ "$WIFI" = true ]; then
-sudo tee /etc/netplan/50-cloud-init.yaml > /dev/null <<EOF
-network:
-  version: 2
-  renderer: networkd
-  wifis:
-    wlan0:
-      dhcp4: true
-      access-points:
-        "$SSID":
-          password: "$PASSWORD"
-EOF
-
-sudo netplan apply
-fi
 
 # rebuild tb3 packages set with flag --rebuild
 if [ "$REBUILD" = true ]; then
@@ -142,4 +118,6 @@ echo "Please reboot in order to see Turtleboot Lite's changes take effect!"
 
 # kill sudo process
 kill %1 2>/dev/null || true
+
+# sucessful, so exit is 0
 exit 0
