@@ -64,7 +64,6 @@ Script name: `turtleboot_preros.bash`
 
 ### Requirements:
 - Ubuntu Server 24.04
-- Wi-Fi Connection
 
 ### Example:
 I want to configure my Raspberry Pi before installing ROS Jazzy.
@@ -138,5 +137,3 @@ Looking for Refs?
 --
 [ROS Jazzy Docs](https://docs.ros.org/en/jazzy/index.html)</br>
 [Robotis Quick Start Guide (Turtlebot3)](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/)</br>
-
-
