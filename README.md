@@ -23,7 +23,7 @@ Bash scripts to auto install ROS (Jazzy) and configure the SBC on a Turtlebot3. 
 - [TurtleBoot ROS](#turtleboot-ros) (C)
 - [TurtleBoot Lite](#turtleboot-lite) (U)
 - [TurtleBoot OPEN CR](#turtleboot-open-cr) (U)
-- [References](#looking-for-refs)
+- [References](#looking-for-references)
 
 ## TurtleBoot Pre-ROS
 Script name: `turtleboot_preros.bash`
@@ -31,14 +31,14 @@ Script name: `turtleboot_preros.bash`
 >**Note:** Run this before running `turtleboot_ros.bash`!
 
 ### Features:
+- Configures systemctl settings on the SBC
 - Prepares SBC for ROS Jazzy install
-- Configures systemctl settings
 
 ### Requirements:
 - Ubuntu Server 24.04
 
 ### Example:
-I want to install ROS Jazzy on my turtlebot 3, but I have not completed any of the setup steps yet and am planning on later 
+I want to install ROS Jazzy on my turtlebot 3, but I have not completed any of the setup steps yet and am planning on later installing ROS
 
 First make the script executable with:
 </br>
@@ -122,10 +122,11 @@ Script name: `turtleboot_opencr.bash`
 
 ### Requirements:
 - Ubuntu Server 24.04
-- ROS installed
+- [Turtleboot Pre-ROS](#turtleboot-pre-ros) or equivalent
+- [Turtleboot ROS](#turtleboot-ros) or equivalent
 
 ### Example:
-I want to just configure the OPEN CR board on my Turtlebot3.
+I want to configure the **OPEN CR board only** on my Turtlebot3.
 
 First make the script executable with:
 </br>
@@ -135,7 +136,7 @@ Run the script:
 </br>
 `bash turtleboot_opencr.bash`
 
-Looking for Refs?
+Looking for References?
 --
 [ROS Jazzy Docs](https://docs.ros.org/en/jazzy/index.html)</br>
 [Robotis Quick Start Guide (Turtlebot3)](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/)</br>
