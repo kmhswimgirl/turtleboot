@@ -111,6 +111,8 @@ sudo apt install -y libudev-dev
 
 # dependencies that Robotis forgot in their setup guide...
 sudo apt install -y ros-jazzy-xacro
+
+# adding cyclone DDS as well
 sudo apt install -y ros-jazzy-rmw-cyclonedds-cpp
 
 # make turtlebot workspace
