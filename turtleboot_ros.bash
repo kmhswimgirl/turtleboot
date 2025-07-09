@@ -107,8 +107,11 @@ sudo apt install -y python3-argcomplete python3-colcon-common-extensions libboos
 sudo apt install -y ros-jazzy-hls-lfcd-lds-driver
 sudo apt install -y ros-jazzy-turtlebot3-msgs
 sudo apt install -y ros-jazzy-dynamixel-sdk
-sudo apt install -y ros-jazzy-xacro
 sudo apt install -y libudev-dev
+
+# dependencies that Robotis forgot in their setup guide...
+sudo apt install -y ros-jazzy-xacro
+sudo apt install -y ros-jazzy-rmw-cyclonedds-cpp
 
 # make turtlebot workspace
 mkdir -p ~/turtlebot3_ws/src
