@@ -18,40 +18,12 @@ Bash scripts to auto install ROS (Jazzy) and configure the SBC on a Turtlebot3. 
 ```
 > **Note:** Never run the scripts as root! 
 ## Table of Contents
-- [TurtleBoot Lite](#turtleboot-lite)
-- [TurtleBoot Pre-ROS](#turtleboot-pre-ros)
-- [TurtleBoot ROS](#turtleboot-ros)
-- [TurtleBoot OPEN CR](#turtleboot-open-cr)
+(C) = Core Script, (U) = Utility Script
+- [TurtleBoot Pre-ROS](#turtleboot-pre-ros) (C)
+- [TurtleBoot ROS](#turtleboot-ros) (C)
+- [TurtleBoot Lite](#turtleboot-lite) (U)
+- [TurtleBoot OPEN CR](#turtleboot-open-cr) (U)
 - [References](#looking-for-refs)
-## TurtleBoot Lite:
-Script name: `turtleboot_lite.bash`
-
-### Args:
-`-h | --help`: Shows information on all args/flags</br>
-`-n | --name NAME`: Sets the hostname of the turtlebot (default is turtle_boot)</br>
-`-id | --ros-id ID`: Sets the ROS_DOMAIN_ID environment variable</br>
-`--rebuild`: add this flag to rebuild the `~/turtlebot3_ws` workspace</br>
-`--reboot`: add this flag to auto reboot at the end of the script
-
-### Features:
-- Regenerates ssh keys
-- Changes the hostname
-- Changes the `ROS_DOMAIN_ID` environment variable
-
-### Requirements:
-- Ubuntu Server 24.04
-- ROS Jazzy Jalisco installed + packages built
-
-### Example:
-I want to change my hostname to _"shelly"_, my `ROS_DOMAIN_ID` to 22, I do **not** want to rebuild the turtlebot3_ws, and I do want to auto reboot.
-
-First make the script executable with:
-</br>
-`chmod +x turtleboot_lite.bash`
-
-Run the script:
-</br>
-`bash turtleboot_lite.bash --name shelly --ros-id 22 --reboot`
 
 ## TurtleBoot Pre-ROS
 Script name: `turtleboot_preros.bash`
@@ -66,7 +38,7 @@ Script name: `turtleboot_preros.bash`
 - Ubuntu Server 24.04
 
 ### Example:
-I want to configure my Raspberry Pi before installing ROS Jazzy.
+I want to install ROS Jazzy on my turtlebot 3, but I have not completed any of the setup steps yet and am planning on later 
 
 First make the script executable with:
 </br>
@@ -111,6 +83,36 @@ First make the script executable with:
 Run the script:
 </br>
 `bash turtleboot_ros.bash --lidar 2 --ros-id 8 --model waffle`
+
+## TurtleBoot Lite:
+Script name: `turtleboot_lite.bash`
+
+### Args:
+`-h | --help`: Shows information on all args/flags</br>
+`-n | --name NAME`: Sets the hostname of the turtlebot (default is turtle_boot)</br>
+`-id | --ros-id ID`: Sets the ROS_DOMAIN_ID environment variable</br>
+`--rebuild`: add this flag to rebuild the `~/turtlebot3_ws` workspace</br>
+`--reboot`: add this flag to auto reboot at the end of the script
+
+### Features:
+- Regenerates ssh keys
+- Changes the hostname
+- Changes the `ROS_DOMAIN_ID` environment variable
+
+### Requirements:
+- Ubuntu Server 24.04
+- ROS Jazzy Jalisco installed + packages built
+
+### Example:
+I want to change my hostname to _"shelly"_, my `ROS_DOMAIN_ID` to 22, I do **not** want to rebuild the turtlebot3_ws, and I do want to auto reboot.
+
+First make the script executable with:
+</br>
+`chmod +x turtleboot_lite.bash`
+
+Run the script:
+</br>
+`bash turtleboot_lite.bash --name shelly --ros-id 22 --reboot`
 
 ## TurtleBoot OPEN CR
 Script name: `turtleboot_opencr.bash`
