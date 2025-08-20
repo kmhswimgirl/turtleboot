@@ -166,6 +166,8 @@ sudo udevadm trigger
 grep -qxF "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" ~/.bashrc || echo "export ROS_DOMAIN_ID=$ROS_ID #TURTLEBOT3" >> ~/.bashrc
 grep -qxF "export LDS_MODEL=LDS-0$LIDAR # lidar config" ~/.bashrc || echo "export LDS_MODEL=LDS-0$LIDAR # lidar config" >> ~/.bashrc
 grep -qxF "export TURTLEBOT3_MODEL=$MODEL # model" ~/.bashrc || echo "export TURTLEBOT3_MODEL=$MODEL # model" >> ~/.bashrc
+grep -qxF "export RMW_IMPLEMENTATION='cpp_cyclonedds' # switch to cyclone dds" ~/.bashrc || echo "export TURTLEBOT3_MODEL='cpp_cyclonedds' # switch to cyclone dds" >> ~/.bashrc
+
 
 # OPEN CR Section
 if [ "$OPENCR" = true ]; then
