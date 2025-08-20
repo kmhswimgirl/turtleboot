@@ -6,7 +6,7 @@
 
 set -e # exit on errors
 
-# Variables
+# variables
 WS_NAME="ros2_ws"
 DOMAIN_ID="30"
 MODEL="burger"
@@ -19,6 +19,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-
 
 # install Gazebo Harmonic
 sudo apt-get updategit check-ignore -v remote_pc.bashgit check-ignore -v remote_pc.bash
+sudo apt-get update
 sudo apt-get install gz-harmonic
 
 # cartographer
