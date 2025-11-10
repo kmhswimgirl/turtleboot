@@ -26,9 +26,9 @@ Bash scripts to auto install ROS (Jazzy) and configure the SBC on a Turtlebot3. 
 - [References](#looking-for-references)
 
 ## TurtleBoot Pre-ROS
-Script name: `turtleboot_preros.bash`
+Script name: `preros.bash`
 
->**Note:** Run this before running `turtleboot_ros.bash`!
+>**Note:** Run this before running `ros.bash`!
 
 ### Features:
 - Configures systemctl settings on the SBC
@@ -42,16 +42,16 @@ I want to install ROS Jazzy on my turtlebot 3, but I have not completed any of t
 
 First make the script executable with:
 </br>
-`chmod +x turtleboot_preros.bash`
+`chmod +x preros.bash`
 
 Run the script:
 </br>
-`bash turtleboot_preros.bash` 
+`bash preros.bash` 
 
 ## TurtleBoot ROS
-Script name: `turtleboot_ros.bash`
+Script name: `ros.bash`
 
->**Note:** Please make sure to run `turtleboot_preros.bash` first before running this script!
+>**Note:** Please make sure to run `preros.bash` first before running this script!
 
 ### Args:
 `-h | --help`: Shows information on all args/flags</br>
@@ -78,14 +78,14 @@ I have a gen 2 LiDAR Turtlebot3 Waffle and want to my `ROS_DOMAIN_ID` to be 8.
 
 First make the script executable with:
 </br>
-`chmod +x turtleboot_ros.bash`
+`chmod +x ros.bash`
 
 Run the script:
 </br>
-`bash turtleboot_ros.bash --lidar 2 --ros-id 8 --model waffle`
+`bash ros.bash --lidar 2 --ros-id 8 --model waffle`
 
 ## TurtleBoot Lite:
-Script name: `turtleboot_lite.bash`
+Script name: `lite.bash`
 
 ### Args:
 `-h | --help`: Shows information on all args/flags</br>
@@ -108,14 +108,14 @@ I want to change my hostname to _"shelly"_, my `ROS_DOMAIN_ID` to 22, I do **not
 
 First make the script executable with:
 </br>
-`chmod +x turtleboot_lite.bash`
+`chmod +x lite.bash`
 
 Run the script:
 </br>
-`bash turtleboot_lite.bash --name shelly --ros-id 22 --reboot`
+`bash lite.bash --name shelly --ros-id 22 --reboot`
 
 ## TurtleBoot OPEN CR
-Script name: `turtleboot_opencr.bash`
+Script name: `opencr.bash`
 
 ### Features:
 - Configures the OPEN CR board
@@ -130,11 +130,11 @@ I want to configure the **OPEN CR board only** on my Turtlebot3.
 
 First make the script executable with:
 </br>
-`chmod +x turtleboot_opencr.bash`
+`chmod +x opencr.bash`
 
 Run the script:
 </br>
-`bash turtleboot_opencr.bash`
+`bash opencr.bash`
 
 Looking for References?
 --
